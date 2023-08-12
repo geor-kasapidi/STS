@@ -41,6 +41,10 @@ final class ReadWriteTests: XCTestCase {
 
         let lock = UnfairLock()
 
+        lock.lock()
+        // ...
+        lock.unlock()
+
         XCTAssertThrowsError(try lock.tryExecute { throw Err() } as Int)
         XCTAssert((try? lock.tryExecute { 5 }) == 5)
     }
